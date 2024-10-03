@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   Pressable,
+  Alert
 } from "react-native";
 import React from "react";
 import { useState } from "react";
@@ -15,6 +16,22 @@ function Login(): React.JSX.Element {
   const [password, setPassword] = useState("");
   const [nextVisible, setNextVisible] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+
+  // ตรวจสอบการกรอกข้อมูล
+  const validateInputs = () => {
+    // กรอกข้อมูลครบทุกช่องไหม
+    if (!name || !password) {
+      Alert.alert("แจ้งเตือน", "\nกรุณากรอกข้อมูลให้ครบทุกช่อง");
+      return false;
+    }
+    /* const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      Alert.alert("แจ้งเตือน", "\nรูปแบบอีเมลไม่ถูกต้อง");
+      return false;
+    } */
+
+    return true;
+  };
 
   return (
     <View style={styles.container}>
@@ -36,6 +53,7 @@ function Login(): React.JSX.Element {
         onChangeText={setPassword}
       />
       <Text style={styles.rightText}>ลืมรหัสผ่าน?</Text>
+
       {/* Button ถัดไป*/}
       <View>
         <Pressable
